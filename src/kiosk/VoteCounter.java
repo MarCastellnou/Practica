@@ -1,7 +1,6 @@
 package kiosk;
 import data.Party;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
@@ -19,6 +18,7 @@ public class VoteCounter {
 
     public VoteCounter(Set<Party> validParties) {
         votos = new HashMap<>();
+
         this.votsPartits=votsPartits;
         this.votsNull=votsNull;
         this.votsBlanc=votsBlanc;
@@ -41,6 +41,17 @@ public class VoteCounter {
     public void countBlank() {this.votsBlanc++;}
     public void scrutinize(Party party) {
 
+        if (party.equals("")){
+            countBlank();
+        }else if (party.equals(null)){
+            countNull();
+        }else {
+            try {
+                countParty(party);
+            }catch (Exception exception){
+                exception.printStackTrace();
+            }
+        }
     }
     public int getVotesFor(Party party) {
         if(!votos.containsKey(party)){return 0;}
