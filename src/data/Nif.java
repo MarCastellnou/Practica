@@ -6,7 +6,15 @@ public class Nif {
         if (nif == null){
             throw new RuntimeException("Error: NIF nulo");
         }else if (nif.length() != 9){
-            throw new RuntimeException("Error: NIF demasiado corto");
+            throw new RuntimeException("Error: Longitud del NIF erronea");
+        }else{
+            for (int i=0; i < nif.length(); i++){
+                if (!Character.isDigit(nif.charAt(i)) && i<=7){
+                    throw new RuntimeException("Error: Posicion numeros");
+                }else if(!Character.isDigit(nif.charAt(i)) && i==8){
+                    throw new RuntimeException("Error: Posicion letra");
+                }
+            }
         }
         this.nif = nif;
     }
