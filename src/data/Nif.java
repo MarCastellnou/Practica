@@ -2,7 +2,14 @@ package data;
 
 public class Nif {
     private final String nif;
-    public Nif(String nif) {this.nif = nif; }
+    public Nif(String nif) {
+        if (nif == null){
+            throw new RuntimeException("Error: NIF nulo");
+        }else if (nif.length() != 9){
+            throw new RuntimeException("Error: NIF demasiado corto");
+        }
+        this.nif = nif;
+    }
     public String getNif() {
         return nif;
     }

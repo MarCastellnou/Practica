@@ -3,11 +3,10 @@ package data;
 public class MailAddress {
     private final String address;
     public MailAddress(String address) {
+        if (address == null){throw new RuntimeException("Error: direccion de mail es nula");}
         this.address = address;
     }
-    public String getAddress() {
-        return address;
-    }
+    public String getAddress() { return address; }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -21,6 +20,5 @@ public class MailAddress {
     }
     @Override
     public String toString() {
-        return "Address{" + "address='" + address + '\'' + '}';
-    }
+        return "Address{" + "address='" + address + '\'' + '}'; }
 }

@@ -4,7 +4,10 @@ package data;
  */
 final public class Party {
     private final String name;
-    public Party(String name) { this.name = name; }
+    public Party(String name) {
+        if(name == null){throw new RuntimeException("Error: Nombre del partido nulo");}
+        this.name = name;
+    }
     public String getName() { return name; }
     @Override
     public boolean equals(Object o) {

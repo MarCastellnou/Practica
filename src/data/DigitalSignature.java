@@ -4,6 +4,7 @@ import java.util.Arrays;
 public class DigitalSignature {
     private final byte[] signature;
     public DigitalSignature(byte[] signature) {
+        if (signature == null){throw new RuntimeException("Error: La firma es nula ");}
         this.signature = signature;
     }
     public byte[] getSignature() {
@@ -14,12 +15,10 @@ public class DigitalSignature {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DigitalSignature sign = (DigitalSignature) o;
-        return Arrays.equals(signature, sign.signature);
+        return signature.equals(sign.signature);
     }
     @Override
-    public int hashCode() {
-        return Arrays.hashCode(signature);
-    }
+    public int hashCode() { return signature.hashCode();}
     @Override
     public String toString() {
         return "Signature{" + "signature='" + Arrays.toString(signature) + '\'' + '}';
