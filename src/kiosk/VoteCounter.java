@@ -43,9 +43,9 @@ public class VoteCounter {
 
     public void scrutinize(Party party) {
 
-        if (party.equals(" ")){
+        if (party.getName().equals(" ")){
             countBlank();
-        }else if (party.equals(null)){
+        }else if (party.getName().equals(null)){
             countNull();
         }else {
             try {
@@ -56,8 +56,11 @@ public class VoteCounter {
         }
     }
     public int getVotesFor(Party party) {
-        if(!votos.containsKey(party)){return 0;}
-        return votos.get(party);
+        if(votos.containsKey(party) == false){
+            return 0;
+        }else {
+            return votos.get(party);
+        }
     }
     public int getNulls() {
         return votsNull;
