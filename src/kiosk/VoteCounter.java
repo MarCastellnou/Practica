@@ -18,11 +18,12 @@ public class VoteCounter {
 
     public VoteCounter(Set<Party> validParties) {
         votos = new HashMap<>();
-
+        Parties = new ArrayList<>();
+        Parties.addAll(validParties);
         this.votsPartits=votsPartits;
         this.votsNull=votsNull;
         this.votsBlanc=votsBlanc;
-        Parties.addAll(validParties);
+
     }
     public void countParty(Party party) throws Exception{
         if (Parties.contains(party)) {
@@ -39,17 +40,18 @@ public class VoteCounter {
     }
     public void countNull() {this.votsNull++;}
     public void countBlank() {this.votsBlanc++;}
+
     public void scrutinize(Party party) {
 
-        if (party.equals("")){
+        if (party.equals(" ")){
             countBlank();
         }else if (party.equals(null)){
             countNull();
         }else {
             try {
                 countParty(party);
-            }catch (Exception exception){
-                exception.printStackTrace();
+            }catch (Exception exc){
+                exc.printStackTrace();
             }
         }
     }
@@ -58,10 +60,10 @@ public class VoteCounter {
         return votos.get(party);
     }
     public int getNulls() {
-        return this.votsNull;
+        return votsNull;
     }
     public int getBlanks() {
-        return this.votsBlanc;
+        return votsBlanc;
     }
-    public int getTotal() { return this.votsPartits+this.votsBlanc+this.votsBlanc;}
+    public int getTotal() { return votsPartits+votsBlanc+votsBlanc;}
 }

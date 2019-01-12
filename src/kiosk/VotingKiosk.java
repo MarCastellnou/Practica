@@ -1,5 +1,6 @@
 package kiosk;
 
+import data.DigitalSignature;
 import data.MailAddress;
 import data.Party;
 import services.ElectoralOrganism;
@@ -14,6 +15,7 @@ public class VotingKiosk {
     MailerService mService;
     Party party;
     MailAddress address;
+    VoteCounter count;
 
     public VotingKiosk() {
         this.eO=null;
@@ -24,6 +26,13 @@ public class VotingKiosk {
 
     public void setElectoralOrganism(ElectoralOrganism eO) {this.eO=eO;}
     public void setMailerService(MailerService mService){this.mService=mService;}
-    public void vote(Party party) {this.party=party;}
-    public void sendeReceipt(MailAddress address) {this.address=address;}
+    public void vote(Party party) {
+        this.party=party;
+        count.scrutinize(party);
+    }
+    public void sendeReceipt(MailAddress address) {
+        this.address=address;
+        DigitalSignature sign = eO.askForDigitalSignature(party);
+        mService.send(address,sign);
+    }
 }
