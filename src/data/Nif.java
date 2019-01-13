@@ -11,7 +11,7 @@ public class Nif {
             for (int i=0; i < nif.length(); i++){
                 if (!Character.isDigit(nif.charAt(i)) && i<=7){
                     throw new RuntimeException("Error: Posicion numeros");
-                }else if(!Character.isDigit(nif.charAt(i)) && i==8){
+                }else if(!Character.isLetter(nif.charAt(i)) && i==8){
                     throw new RuntimeException("Error: Posicion letra");
                 }
             }
