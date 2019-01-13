@@ -15,7 +15,7 @@ public class VotingKiosk {
     MailerService mService;
     Party party;
     MailAddress address;
-    VoteCounter count;
+    public VoteCounter count;
 
     public VotingKiosk() {
         this.eO=null;
