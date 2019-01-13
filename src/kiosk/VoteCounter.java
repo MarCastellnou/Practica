@@ -45,7 +45,7 @@ public class VoteCounter {
 
         if (party.getName().equals(" ")){
             countBlank();
-        }else if (party.getName().equals(null)){
+        }else if (party.getName().equals("null")){
             countNull();
         }else {
             try {
@@ -68,5 +68,5 @@ public class VoteCounter {
     public int getBlanks() {
         return votsBlanc;
     }
-    public int getTotal() { return votsPartits+votsBlanc+votsBlanc;}
+    public int getTotal() { return votsPartits+votsBlanc+votsNull;}
 }
