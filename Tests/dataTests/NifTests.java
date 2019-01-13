@@ -15,11 +15,13 @@ public class NifTests {
     public void NifLongError(){
         assertThrows(RuntimeException.class, () -> nif = new Nif("562398L"));
         assertThrows(RuntimeException.class, () -> nif = new Nif("98624531783N"));
+        assertThrows(RuntimeException.class, () -> nif = new Nif(""));
     }
     @Test
     public void NifMasDeUnaLetra(){
         assertThrows(RuntimeException.class, () -> nif = new Nif("9862O531N"));
         assertThrows(RuntimeException.class, () -> nif = new Nif("9M62O531N"));
+        assertThrows(RuntimeException.class, () -> nif = new Nif("ON6238N87"));
     }
 
     @Test
