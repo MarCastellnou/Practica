@@ -1,14 +1,10 @@
 package kioskTests;
 import data.Party;
 import kiosk.VoteCounter;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Set;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -71,5 +67,45 @@ public class VoteCounterTests {
         assertEquals(2,count.getNulls());
         assertEquals(7,count.getTotal());
 
+    }
+
+    @Test
+    public void getVoterForTest(){
+        Party partido = new Party ("p1");
+        Party partido2 = new Party ("p2");
+        count.scrutinize(partido);
+        count.scrutinize(partido);
+        count.scrutinize(partido2);
+        assertEquals(2,count.getVotesFor(partido));
+        assertEquals(1,count.getVotesFor(partido2));
+    }
+    @Test
+    public void getBlanksTest(){
+        Party partido = new Party ("p1");
+        Party partido2 = new Party (" ");
+        count.scrutinize(partido);
+        count.scrutinize(partido);
+        count.scrutinize(partido2);
+        assertEquals(1,count.getBlanks());
+    }
+    @Test
+    public void getNullsTest(){
+        Party partido = new Party ("null");
+        Party partido2 = new Party (" ");
+        count.scrutinize(partido);
+        count.scrutinize(partido2);
+        assertEquals(1,count.getNulls());
+    }
+    @Test
+    public void getTotalTest(){
+        Party partido = new Party ("null");
+        Party partido2 = new Party (" ");
+        Party partido3 = new Party ("p1");
+        count.scrutinize(partido);
+        count.scrutinize(partido2);
+        count.scrutinize(partido3);
+        count.scrutinize(partido3);
+        count.scrutinize(partido);
+        assertEquals(5,count.getTotal());
     }
 }

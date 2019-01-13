@@ -10,9 +10,7 @@ import org.junit.jupiter.api.Test;
 import services.ElectoralOrganism;
 import services.MailerService;
 import java.util.ArrayList;
-
 import java.util.HashSet;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class VotingKioskTests {
@@ -110,12 +108,43 @@ public class VotingKioskTests {
         Party party = new Party("p");
         MailAddress adress= new MailAddress("mcq2@estudiants.udl");
 
-        if(eO.canVote(nif)){
+        if(eO.canVote(nif) && parties.contains(party)){
             kiosk.vote(party);
             eO.disableVoter(nif);
             kiosk.sendeReceipt(adress);
         }
-        assertEquals(1,((mailServiceTestDoble) mService).enviados);
+
+        Nif nif1 = new Nif("73214187O"); //este nif no esta en el censo
+        Party party1 = new Party("p");
+        MailAddress adress1= new MailAddress("mcq3@estudiants.udl");
+
+        if(eO.canVote(nif1)&& parties.contains(party1)){
+            kiosk.vote(party1);
+            eO.disableVoter(nif1);
+            kiosk.sendeReceipt(adress1);
+        }
+
+        Nif nif2 = new Nif("63925698L");
+        Party party2 = new Party("partido1"); // partido no esta en la lista
+        MailAddress adress2= new MailAddress("mcq4@estudiants.udl");
+
+        if(eO.canVote(nif2) && parties.contains(party2)){
+            kiosk.vote(party2);
+            eO.disableVoter(nif2);
+            kiosk.sendeReceipt(adress2);
+        }
+
+        Nif nif3 = new Nif("23056817D");
+        Party party3 = new Party("p4");
+        MailAddress adress3= new MailAddress("mcq5@estudiants.udl");
+
+        if(eO.canVote(nif3) && parties.contains(party3)){
+            kiosk.vote(party3);
+            eO.disableVoter(nif3);
+            kiosk.sendeReceipt(adress3);
+        }
+        assertEquals(2,((mailServiceTestDoble) mService).enviados);
+        assertEquals(2,kiosk.count.getTotal());
     }
 
 }
